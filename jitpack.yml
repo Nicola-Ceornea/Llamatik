@@ -5,4 +5,4 @@ before_install:
   - git submodule update --init --recursive
 
 install:
-  - RELEASE_VERSION=${VERSION} ./gradlew :library:publishAndroidReleasePublicationToMavenLocal -Porg.gradle.java.installations.auto-download=false
+  - RELEASE_VERSION=${VERSION} ./gradlew :library:publishAndroidReleasePublicationToMavenLocal -Porg.gradle.java.installations.auto-download=true -x :shared:compileKotlinIosArm64 -x :shared:compileKotlinIosX64 -x :shared:compileKotlinIosSimulatorArm64
