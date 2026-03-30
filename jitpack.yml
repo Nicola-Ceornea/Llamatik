@@ -5,4 +5,4 @@ before_install:
   - git submodule update --init --recursive
 
 install:
-  - RELEASE_VERSION=${VERSION} ./gradlew :library:publishAndroidReleasePublicationToMavenLocal
+  - RELEASE_VERSION=${VERSION} ./gradlew :library:publishAndroidReleasePublicationToMavenLocal -Porg.gradle.java.installations.auto-download=false
