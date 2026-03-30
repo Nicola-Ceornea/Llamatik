@@ -349,6 +349,8 @@ actual object LlamaBridge {
         }
     }
 
+    actual fun tokenize(text: String): Int = com.llamatik.library.platform.llama.llama_tokenize_count(text)
+
     actual fun sessionReset(): Boolean = llama_generate_session_reset()
     actual fun sessionSave(path: String): Boolean = llama_generate_session_save(path)
     actual fun sessionLoad(path: String): Boolean = llama_generate_session_load(path)

@@ -181,6 +181,9 @@ bool llama_generate_session_load(const char *path_session);
 /** Continues using existing KV cache; returns malloc string. */
 char *llama_generate_continue(const char *prompt);
 
+/** Returns the number of tokens for the given text. Returns -1 if model not loaded. */
+int llama_tokenize_count(const char *text);
+
 #ifdef __cplusplus
 } // extern "C"
 #endif

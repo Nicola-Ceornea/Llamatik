@@ -173,6 +173,8 @@ actual object LlamaBridge {
         hasSession.store(false)
     }
 
+    actual fun tokenize(text: String): Int = -1
+
     actual fun nativeCancelGenerate() {}
 
     actual fun updateGenerateParams(

@@ -50,6 +50,10 @@ actual object LlamaBridge {
     private external fun nativeSessionLoad(path: String): Boolean
     private external fun nativeGenerateContinue(prompt: String): String
 
+    // Tokenize
+    private external fun nativeTokenize(text: String): Int
+    actual fun tokenize(text: String): Int = nativeTokenize(text)
+
     actual fun sessionReset(): Boolean = nativeSessionReset()
     actual fun sessionSave(path: String): Boolean = nativeSessionSave(path)
     actual fun sessionLoad(path: String): Boolean = nativeSessionLoad(path)

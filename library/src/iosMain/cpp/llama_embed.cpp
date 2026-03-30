@@ -1554,4 +1554,14 @@ void llama_generate_free(void) {
     }
 }
 
+int llama_tokenize_count(const char *text) {
+    if (!gen_model || !text) return -1;
+
+    const llama_vocab *vocab = llama_model_get_vocab(gen_model);
+    std::vector<llama_token> tokens(std::max(1, (int)std::strlen(text)));
+
+    int n = tokenize_with_retry(vocab, text, tokens, /*add_bos=*/false, /*parse_special=*/true);
+    return n;
+}
+
 } // extern "C"

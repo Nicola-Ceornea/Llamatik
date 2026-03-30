@@ -47,6 +47,10 @@ actual object LlamaBridge {
         repeatPenalty: Float,
     )
 
+    // Tokenize
+    private external fun nativeTokenize(text: String): Int
+    actual fun tokenize(text: String): Int = nativeTokenize(text)
+
     // ===================== KV session (JNI) =====================
     private external fun nativeSessionReset(): Boolean
     private external fun nativeSessionSave(path: String): Boolean

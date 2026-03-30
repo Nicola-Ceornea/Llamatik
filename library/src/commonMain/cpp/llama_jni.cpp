@@ -1028,3 +1028,26 @@ Java_com_llamatik_library_platform_LlamaBridge_nativeUpdateGenerationParams(
     g_repeat_penalty  = repeatPenalty;
     g_max_new_tokens  = (int)maxTokens;
 }
+
+// ===================================================================================
+//  Tokenize — returns the token count for a given text without generating.
+// ===================================================================================
+
+extern "C" JNIEXPORT jint JNICALL
+Java_com_llamatik_library_platform_LlamaBridge_nativeTokenize(
+        JNIEnv *env,
+        jobject /*thiz*/,
+        jstring jtext) {
+
+    if (!gen_model) return -1;
+
+    const char *text = env->GetStringUTFChars(jtext, nullptr);
+    if (!text) return -1;
+
+    const llama_vocab *vocab = llama_model_get_vocab(gen_model);
+    std::vector<llama_token> tokens(std::max(1, (int)std::strlen(text)));
+
+    int n = tokenize_with_retry(vocab, text, tokens, /*add_bos=*/false, /*parse_special=*/true);
+    env->ReleaseStringUTFChars(jtext, text);
+    return n;
+}

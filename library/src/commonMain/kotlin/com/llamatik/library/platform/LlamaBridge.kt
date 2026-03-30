@@ -63,6 +63,13 @@ expect object LlamaBridge {
      */
     fun generateContinue(prompt: String): String
 
+    /**
+     * Returns the number of tokens for the given text using the loaded model's tokenizer.
+     * The generate model must be loaded first via [initGenerateModel].
+     * Returns -1 if the model is not loaded.
+     */
+    fun tokenize(text: String): Int
+
     fun shutdown()
 
     fun nativeCancelGenerate()

@@ -1,0 +1,5 @@
+before_install:
+  - git submodule update --init --recursive
+
+install:
+  - RELEASE_VERSION=${VERSION} ./gradlew :library:publishAndroidReleasePublicationToMavenLocal
