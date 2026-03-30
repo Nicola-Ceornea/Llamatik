@@ -3,6 +3,9 @@ jdk:
 
 before_install:
   - git submodule update --init --recursive
+  - sed -i 's/include(":composeApp")/\/\/include(":composeApp")/' settings.gradle.kts
+  - sed -i 's/include(":shared")/\/\/include(":shared")/' settings.gradle.kts
+  - sed -i '/foojay-resolver/d' settings.gradle.kts
 
 install:
-  - RELEASE_VERSION=${VERSION} ./gradlew :library:publishAndroidReleasePublicationToMavenLocal -Porg.gradle.java.installations.auto-download=true -x :shared:compileKotlinIosArm64 -x :shared:compileKotlinIosX64 -x :shared:compileKotlinIosSimulatorArm64
+  - RELEASE_VERSION=${VERSION} ./gradlew :library:assembleRelease :library:publishAndroidReleasePublicationToMavenLocal --no-configuration-cache
