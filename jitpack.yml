@@ -3,9 +3,13 @@ jdk:
 
 before_install:
   - git submodule update --init --recursive
-  - sed -i 's/include(":composeApp")/\/\/include(":composeApp")/' settings.gradle.kts
-  - sed -i 's/include(":shared")/\/\/include(":shared")/' settings.gradle.kts
+  - sed -i '/include(":composeApp")/d' settings.gradle.kts
+  - sed -i '/include(":shared")/d' settings.gradle.kts
   - sed -i '/foojay-resolver/d' settings.gradle.kts
+  - sed -i '/compose.multiplatform/d' build.gradle.kts
+  - sed -i '/compose.compiler/d' build.gradle.kts
+  - sed -i '/compose-compiler/d' settings.gradle.kts
+  - sed -i '/compose/d' settings.gradle.kts
 
 install:
   - RELEASE_VERSION=${VERSION} ./gradlew :library:assembleRelease :library:publishAndroidReleasePublicationToMavenLocal --no-configuration-cache
